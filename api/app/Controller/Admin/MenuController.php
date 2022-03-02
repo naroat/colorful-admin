@@ -29,7 +29,7 @@ class MenuController extends AbstractController
         $params = $this->verify->requestParams([
             ['name', ""],
             ['is_all', 0],
-            ['is_tree', 0]
+            ['is_tree', 0],
         ], $this->request);
 
         $list = $this->menuService->getList($params);

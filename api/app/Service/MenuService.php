@@ -29,7 +29,7 @@ class MenuService extends AbstractController
     {
         $list = (new \App\Model\Menu())->getList(['id', 'name', 'path', 'component', 'icon', 'p_id', 'sort', 'created_at'], $params, function ($orm) use ($params) {
             //筛选
-            if ($params['name'] == true) {
+            if ($params['name'] != '') {
                 $orm->where('name', 'like', "%{$params['name']}%");
             }
 

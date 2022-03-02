@@ -17,7 +17,7 @@ class ConfigService extends AbstractController
 
     public function getData($params)
     {
-        $list = $this->configModel->getList(['id', 'code', 'desc', 'value', 'unit'], $params, function ($query) use ($params) {
+        $list = $this->configModel->getList(['id', 'code', 'desc', 'value'], $params, function ($query) use ($params) {
             $query->orderBy('id', 'ASC');
             if (isset($params['codes']) && $params['codes'] != '') {
                 $query->whereIn('code', $params['codes']);
@@ -50,7 +50,6 @@ class ConfigService extends AbstractController
             foreach ($params as $key => $val) {
                 $this->configModel->where('code', $key)->update([
                     'value' => htmlspecialchars($val['value'], ENT_QUOTES),
-                    'unit' => !empty($val['unit']) ? htmlspecialchars($val['unit'], ENT_QUOTES) : '',
                 ]);
             }
 
