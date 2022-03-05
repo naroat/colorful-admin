@@ -27,8 +27,7 @@ class ConfigController extends AbstractController
 //                    'base_setting_favicon',
                     'base_setting_keyword',
                     'base_setting_description',
-                ],
-                'is_all' => 1
+                ]
             ]);
             return $this->responseCore->success($list);
         } catch (\Exception $e) {

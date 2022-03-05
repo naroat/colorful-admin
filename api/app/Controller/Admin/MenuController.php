@@ -30,6 +30,7 @@ class MenuController extends AbstractController
             ['name', ""],
             ['is_all', 0],
             ['is_tree', 0],
+            ['p_id', ''],
         ], $this->request);
 
         $list = $this->menuService->getList($params);

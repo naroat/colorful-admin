@@ -32,6 +32,9 @@ class MenuService extends AbstractController
             if ($params['name'] != '') {
                 $orm->where('name', 'like', "%{$params['name']}%");
             }
+            if ($params['p_id'] != '') {
+                $orm->where('p_id', $params['p_id']);
+            }
 
             $orm->orderBy('p_id', 'ASC')->orderBy('sort', 'DESC');
         });
