@@ -46,7 +46,13 @@ class RoleService
 
     public function getOne(int $id)
     {
-        return $this->roleModel->getOneById($id, ['id', 'name']);
+        $data =  $this->roleModel->getOne(['id', 'name'], function ($query) use ($id) {
+            $query->where('id', $id);
+            $query->with('permissions');
+        });
+        $data->permission_ids = $data->permissions->pluck('id');
+        unset($data->permissions);
+        return $data;
     }
 
     public function add($params)

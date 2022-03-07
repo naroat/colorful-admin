@@ -50,7 +50,7 @@ class AdminUserService
      */
     public function getList($params)
     {
-        $list = $this->adminUserModel->getList(['id', 'account', 'name', 'headimg', 'created_at'], $params, function ($query) use ($params) {
+        $list = $this->adminUserModel->getList(['id', 'account', 'name', 'headimg', 'created_at', 'last_login_ip', 'last_login_time', 'role_id'], $params, function ($query) use ($params) {
             //with
             $query->with(['role' => function ($query) {
                 $query->select(['id', 'name']);
@@ -60,7 +60,10 @@ class AdminUserService
                 $query->where('account', 'like', "%{$params['account']}%");
             }
         });
-        $list->roles = ['admin'];
+        $list->each(function ($item) {
+            $item->role_name = $item->role->name ?? '';
+            unset($item->role);
+        });
         return $list;
     }
 
@@ -71,12 +74,12 @@ class AdminUserService
      */
     public function getOne(int $id)
     {
-        $data = $this->adminUserModel->getOne(['id', 'account', 'name', 'headimg', 'created_at'], function ($query) use ($id) {
+        $data = $this->adminUserModel->getOne(['id', 'account', 'name', 'headimg', 'role_id'], function ($query) use ($id) {
+            $query->where('id', $id);
             $query->with(['role' => function ($query) {
                 $query->select(['id', 'name']);
             }]);
         });
-
         return $data ?? [];
     }
 
@@ -198,6 +201,31 @@ class AdminUserService
         $data->menu = $this->menuService->getAllowMenu($data->role_id);
         $data->roles = [$data->role_name];
         return $data;
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param $params
+     * @param $id
+     */
+    public function updatePassword($params, $id)
+    {
+        //获取管理员信息
+        $adminUser = $this->adminUserModel->getOneById($id);
+
+        //旧密码验证
+        if (!eq_password($adminUser->password, $params['old_password'], $adminUser->salt)) {
+            throw new \Exception("旧密码错误！");
+        }
+
+        //创建密码
+        $params['password'] = create_password($params['password'], $salt);
+        $params['salt'] = $salt;
+
+        set_save_data($adminUser, $params)->save();
+
+        return true;
     }
 
     public function login($params)

@@ -71,6 +71,7 @@ class MenuService extends AbstractController
             'icon' => $params['icon'],
             'p_id' => $params['p_id'],
             'sort' => $params['sort'],
+            'component' => $params['component'],
         ]);
         $menuModel->save();
 
@@ -98,6 +99,7 @@ class MenuService extends AbstractController
             'icon' => $params['icon'],
             'p_id' => $params['p_id'],
             'sort' => $params['sort'],
+            'component' => $params['component'],
         ]);
         $menu->save();
         return true;

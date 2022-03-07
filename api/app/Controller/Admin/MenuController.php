@@ -62,6 +62,7 @@ class MenuController extends AbstractController
                 ['icon', ""],
                 ['p_id', 0],
                 ['sort', 0],
+                ['component', ''],
             ], $this->request);
 
             //验证参数
@@ -75,9 +76,9 @@ class MenuController extends AbstractController
                     "sort" => "integer",
                 ],
                 [
-                    "name:required" => "请填写菜单名称！",
-                    "p_id:integer" => "参数错误！",
-                    "sort:integer" => "参数错误！",
+                    "name.required" => "请填写菜单名称！",
+                    "p_id.integer" => "参数错误！",
+                    "sort.integer" => "参数错误！",
                 ]
             );
 
@@ -98,6 +99,7 @@ class MenuController extends AbstractController
                 ['icon', ""],
                 ['p_id', 0],
                 ['sort', 0],
+                ['component', ''],
             ], $this->request);
 
             //验证参数
@@ -111,9 +113,9 @@ class MenuController extends AbstractController
                     "sort" => "integer",
                 ],
                 [
-                    "name:required" => "请填写菜单名称！",
-                    "p_id:integer" => "参数错误！",
-                    "sort:integer" => "参数错误！",
+                    "name.required" => "请填写菜单名称！",
+                    "p_id.integer" => "参数错误！",
+                    "sort.integer" => "参数错误！",
                 ]
             );
 

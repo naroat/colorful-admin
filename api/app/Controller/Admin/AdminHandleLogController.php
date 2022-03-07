@@ -33,6 +33,6 @@ class AdminHandleLogController extends \Taoran\HyperfPackage\Core\AbstractContro
 
         $list = $this->adminHandleLogService->getList($params);
 
-        return $this->helper->success($list);
+        return $this->responseCore->success($list);
     }
 }

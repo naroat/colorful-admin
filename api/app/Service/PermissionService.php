@@ -28,18 +28,19 @@ class PermissionService extends AbstractController
 
     public function getList($params)
     {
-        $list = $this->permissionModel->getList(['id', 'code', 'name', 'p_id', 'created_at'], $params, function ($orm) use ($params) {
+        $list = $this->permissionModel->getList(['id', 'code', 'name', 'type', 'created_at', 'updated_at'], $params, function ($orm) use ($params) {
             //筛选
             if ($params['name'] != "") {
 
                 $orm->where('name', 'like', "%{$params['name']}%");
             }
 
-            if ($params['p_id'] != "") {
-                $orm->where('p_id', $params['p_id']);
+            if ($params['code'] != "") {
+                $orm->where('code', 'like', "%{$params['code']}%");
             }
 
             $orm->with('menus');
+            $orm->orderBy('id', 'DESC');
         });
 
         //重装数据
@@ -47,6 +48,7 @@ class PermissionService extends AbstractController
             //组合菜单id
             $item->menu_ids = !empty($item->menus) ? $item->menus->pluck('id') : [];
             $item->menu_names = !empty($item->menus) ? $item->menus->pluck('name') : [];
+            $item->type_text = \App\Model\Permission::$type[$item->type];
             unset($item->menus);
         });
 
@@ -55,14 +57,14 @@ class PermissionService extends AbstractController
 
     public function getOne(int $id)
     {
-        $role = $this->permissionModel->getOne(['*'], function ($orm) use ($id) {
+        $data = $this->permissionModel->getOne(['*'], function ($orm) use ($id) {
             $orm->where('id', $id);
             $orm->with('menus');
         });
         //组合菜单id
-        $role->menu_ids = !empty($role->menus) ? $role->menus->pluck('id') : [];
-        unset($role->menus);
-        return $role;
+        $data->menu_ids = !empty($data->menus) ? $data->menus->pluck('id') : [];
+        unset($data->menus);
+        return $data;
     }
 
     public function add($params)
@@ -78,16 +80,6 @@ class PermissionService extends AbstractController
                 }
             }
 
-            //检查上级权限
-            if (!empty($params['p_id'])) {
-                $parent_permission= $this->permissionModel->getOne(['*'], function ($query) use ($params) {
-                    $query->where('id', $params['p_id']);
-                });
-                if (!$parent_permission) {
-                    throw new \Exception("上级权限不存在！");
-                }
-            }
-
             Db::beginTransaction();
 
             //添加
@@ -95,7 +87,7 @@ class PermissionService extends AbstractController
             set_save_data($permissionModel, [
                 'name' => $params['name'],
                 'code' => $params['code'],
-                'p_id' => $params['p_id'],
+                'type' => $params['type'],
             ]);
             $permissionModel->save();
 
@@ -115,15 +107,6 @@ class PermissionService extends AbstractController
             //检查权限是否存在
             $permission = $this->permissionModel->getOneById($id);
 
-            //检查上级权限
-            if (!empty($params['p_id'])) {
-                $parent_permission= $this->permissionModel->getOne(['*'], function ($query) use ($params) {
-                    $query->where('id', $params['p_id']);
-                });
-                if (!$parent_permission) {
-                    throw new \Exception("上级权限不存在！");
-                }
-            }
 
             Db::beginTransaction();
 
@@ -131,7 +114,7 @@ class PermissionService extends AbstractController
             set_save_data($permission, [
                 'name' => $params['name'],
                 'code' => $params['code'],
-                'p_id' => $params['p_id'],
+                'type' => $params['type'],
             ]);
             $permission->save();
 

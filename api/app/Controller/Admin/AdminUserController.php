@@ -161,6 +161,45 @@ class AdminUserController extends AbstractController
     }
 
     /**
+     * 修改密码
+     *
+     * @return array
+     */
+    public function updatePassword($id)
+    {
+        try {
+            $params = $this->verify->requestParams([
+                ['old_password', ''],
+                ['password', ''],
+                ['password_confirmation', ''],
+            ], $this->request);
+
+            //参数验证
+            $this->verify->check(
+                $params,
+                [
+                    'old_password' => 'required|min:6|max:16',
+                    'password' => 'required|min:6|max:16',
+                    'password_confirmation' => 'required|confirmed',
+                ],
+                [
+                    'old_password.required' => '旧密码不能为空！',
+                    'password.required' => '新密码不能为空！',
+                    'password_confirmation.required' => '重复新密码不能为空！',
+                    'password_confirmation.confirmed' => '重复密码错误！',
+                    'password.min' => '密码不能小于6位！',
+                    'password.max' => '密码不能大于16位！',
+                ]
+            );
+
+            $this->adminUserService->updatePassword($params, $id);
+            return $this->responseCore->success('操作成功！');
+        } catch (\Exception $e) {
+            return $this->responseCore->error($e->getMessage());
+        }
+    }
+
+    /**
      * 登录
      *
      * @param RequestInterface $request
@@ -195,7 +234,7 @@ class AdminUserController extends AbstractController
             //响应
             return $this->responseCore->success($result);
         } catch (\Exception $e) {
-            return $this->responseCore->error(Code::VALIDATE_ERROR, $e->getMessage());
+            return $this->responseCore->error($e->getMessage());
         }
     }
 

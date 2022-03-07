@@ -33,7 +33,8 @@ class PermissionController extends \Taoran\HyperfPackage\Core\AbstractController
             //接收参数
             $params =$this->verify->requestParams([
                 ['name', ""],
-                ['p_id', ""],
+                ['code', ""],
+                ['type', ""],
                 ['is_all', 0]
             ], $this->request);
 
@@ -65,7 +66,7 @@ class PermissionController extends \Taoran\HyperfPackage\Core\AbstractController
             $params =$this->verify->requestParams([
                 ['name', ""],
                 ['code', ""],
-                ['p_id', 0],
+                ['type', 0],
                 ['menu_ids', ""],
             ], $this->request);
 
@@ -75,13 +76,13 @@ class PermissionController extends \Taoran\HyperfPackage\Core\AbstractController
                 [
                     "name" => "required",
                     "code" => '',
-                    "p_id" => "integer",
+                    "type" => "integer",
                     "menu_ids.*" => "integer",
                 ],
                 [
                     "name:required" => "请填写权限名称！",
                     "menu_id.*:integer" => "请选择菜单！",
-                    "p_id:integer" => "参数错误！",
+                    "type:integer" => "参数错误！",
                 ]
             );
 
@@ -99,7 +100,7 @@ class PermissionController extends \Taoran\HyperfPackage\Core\AbstractController
             $params =$this->verify->requestParams([
                 ['name', ""],
                 ['code', ""],
-                ['p_id', 0],
+                ['type', 0],
                 ['menu_ids', ""],
             ], $this->request);
 
@@ -109,13 +110,13 @@ class PermissionController extends \Taoran\HyperfPackage\Core\AbstractController
                 [
                     "name" => "required",
                     "code" => '',
-                    "p_id" => "integer",
+                    "type" => "integer",
                     "menu_ids.*" => "integer",
                 ],
                 [
                     "name:required" => "请填写权限名称！",
                     "menu_id.*:integer" => "请选择菜单！",
-                    "p_id:integer" => "参数错误！",
+                    "type:integer" => "参数错误！",
                 ]
             );
 

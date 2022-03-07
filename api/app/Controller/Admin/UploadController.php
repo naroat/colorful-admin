@@ -29,6 +29,22 @@ class UploadController extends AbstractController
     public function upload(RequestInterface $request)
     {
         try {
+            //接收参数
+            $params = $this->verify->requestParams([
+                ['type', ""],
+            ], $this->request);
+
+            //验证参数
+            $this->verify->check(
+                $params,
+                [
+                    "type" => 'required',
+                ],
+                [
+                    "type.required" => "请设置类型！",
+                ]
+            );
+
             $upload = new Upload();
             $file = $upload->checkFile();
             $path = $this->updateType($request->input('type') ?? '');
@@ -86,6 +102,9 @@ class UploadController extends AbstractController
     public function updateType($type)
     {
         switch ($type) {
+            case 'admin_user_headimg':
+                $path = 'public/uploads/admin_user/headimg/';
+                break;
             case 'article_markdown':
                 $path = 'public/uploads/article/markdown/';
                 break;
