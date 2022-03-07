@@ -226,10 +226,11 @@ class AdminUserService
         }
 
         //创建密码
-        $params['password'] = create_password($params['password'], $salt);
-        $params['salt'] = $salt;
+        $new_params = [];
+        $new_params['password'] = create_password($params['password'], $salt);
+        $new_params['salt'] = $salt;
 
-        set_save_data($adminUser, $params)->save();
+        set_save_data($adminUser, $new_params)->save();
 
         return true;
     }

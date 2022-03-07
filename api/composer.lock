@@ -6657,11 +6657,11 @@
         },
         {
             "name": "taoran/hyperf-package",
-            "version": "v1.0.15",
+            "version": "v1.0.16",
             "source": {
                 "type": "git",
                 "url": "https://gitee.com/trsunshine/hyperf-package.git",
-                "reference": "bb78cbd51ec18cc03dd0395cb75a82898580fae7"
+                "reference": "8df0cf91baa614b329b6a15700d71a83c1a9951e"
             },
             "require": {
                 "aliyuncs/oss-sdk-php": "^2.4",
@@ -6701,7 +6701,7 @@
                 "package",
                 "util"
             ],
-            "time": "2022-02-24T05:50:27+00:00"
+            "time": "2022-03-03T03:55:30+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -10225,5 +10225,5 @@
         "php": ">=7.3"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }

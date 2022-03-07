@@ -22,11 +22,11 @@ Router::addGroup('/api/admin', function () {
     Router::put('/admin/users/{id}', 'App\Controller\Admin\AdminUserController@update');
     Router::delete('/admin/users/{id}', 'App\Controller\Admin\AdminUserController@destroy');
     //修改密码
-    Router::get('/update/passwords/{id}', 'App\Controller\Admin\AdminUserController@updatePassword');
+    Router::put('/update/passwords/{id}', 'App\Controller\Admin\AdminUserController@updatePassword');
     //获取当前管理员相关信息
     Router::get('/current/users', 'App\Controller\Admin\AdminUserController@getCurrentUser');
     //操作日志
-    Router::get('/admin/handle/logs', 'App\Controller\Admin\AdminHandleLogController@index');
+    Router::get('/handle/logs', 'App\Controller\Admin\AdminHandleLogController@index');
     //文章分类
     Router::get('/article/categorys', 'App\Controller\Admin\ArticleCategoryController@index');
     Router::get('/article/categorys/{id}', 'App\Controller\Admin\ArticleCategoryController@show');

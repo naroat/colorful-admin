@@ -2,18 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Service\AdminHandleLogService;
 use Hyperf\Di\Annotation\Inject;
 
 /**
  * 操作日志
- *
- * Class RoleController
- * @package App\Controller
  */
-
 class AdminHandleLogController extends \Taoran\HyperfPackage\Core\AbstractController
 {
     /**
