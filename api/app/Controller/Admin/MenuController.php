@@ -131,6 +131,7 @@ class MenuController extends AbstractController
      * 删除
      *
      * @param $id
+     * @return array
      */
     public function destroy($id)
     {

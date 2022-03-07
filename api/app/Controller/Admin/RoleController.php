@@ -100,6 +100,7 @@ class RoleController extends AbstractController
      * 删除角色
      *
      * @param $id
+     * @return array
      */
     public function destroy($id)
     {

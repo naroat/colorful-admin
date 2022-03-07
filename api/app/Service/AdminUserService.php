@@ -4,7 +4,6 @@
 namespace App\Service;
 
 use App\Model\AdminUser;
-use Carbon\Carbon;
 use Hyperf\DbConnection\Db;
 use Hyperf\Di\Annotation\Inject;
 use Phper666\JwtAuth\Jwt;
@@ -71,6 +70,7 @@ class AdminUserService
      * 单条
      *
      * @param int $id
+     * @return array|\Hyperf\Database\Model\Model|\Hyperf\Database\Query\Builder|object|null
      */
     public function getOne(int $id)
     {
@@ -125,7 +125,9 @@ class AdminUserService
     /**
      * 更新
      *
-     * @param int $id
+     * @param $id
+     * @param $params
+     * @throws \Exception
      */
     public function update($id, $params)
     {
@@ -165,6 +167,8 @@ class AdminUserService
      * 删除
      *
      * @param int $id
+     * @return bool
+     * @throws \Exception
      */
     public function destroy(int $id)
     {
@@ -208,6 +212,8 @@ class AdminUserService
      *
      * @param $params
      * @param $id
+     * @return bool
+     * @throws \Exception
      */
     public function updatePassword($params, $id)
     {
@@ -228,6 +234,15 @@ class AdminUserService
         return true;
     }
 
+    /**
+     * 登录
+     *
+     * @param $params
+     * @return array
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
     public function login($params)
     {
         //查询用户信息

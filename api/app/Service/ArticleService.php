@@ -69,6 +69,7 @@ class ArticleService
      * 单条
      *
      * @param int $id
+     * @return array|\Hyperf\Database\Model\Model|\Hyperf\Database\Query\Builder|object|null
      */
     public function getOne(int $id)
     {
@@ -88,6 +89,9 @@ class ArticleService
 
     /**
      * 添加
+     *
+     * @param $params
+     * @throws \Exception
      */
     public function add($params)
     {
@@ -122,6 +126,8 @@ class ArticleService
      * 更新
      *
      * @param int $id
+     * @param $params
+     * @throws \Exception
      */
     public function update(int $id, $params)
     {
@@ -144,6 +150,8 @@ class ArticleService
      * 删除
      *
      * @param int $id
+     * @return bool
+     * @throws \Exception
      */
     public function destroy(int $id)
     {
@@ -171,6 +179,8 @@ class ArticleService
      * 设置标签
      *
      * @param $params
+     * @param $article_id
+     * @return bool
      */
     public function setTags($params, $article_id)
     {

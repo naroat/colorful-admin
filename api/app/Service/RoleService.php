@@ -164,6 +164,9 @@ class RoleService
      *
      * @param $role_id
      * @param $permission_ids
+     * @param bool $is_update
+     * @return bool
+     * @throws \Exception
      */
     public function bindRolePermission($role_id, $permission_ids, $is_update = false)
     {
