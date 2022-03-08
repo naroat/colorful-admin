@@ -51,12 +51,20 @@ class AdminUserService
     {
         $list = $this->adminUserModel->getList(['id', 'account', 'name', 'headimg', 'created_at', 'last_login_ip', 'last_login_time', 'role_id'], $params, function ($query) use ($params) {
             //with
-            $query->with(['role' => function ($query) {
-                $query->select(['id', 'name']);
+            $query->with(['role' => function ($_query) {
+                $_query->select(['id', 'name']);
             }]);
             //where
             if (isset($params['account']) && $params['account'] != '') {
                 $query->where('account', 'like', "%{$params['account']}%");
+            }
+            if (isset($params['name']) && $params['name'] != '') {
+                $query->where('name', 'like', "%{$params['name']}%");
+            }
+            if (isset($params['role_id']) && $params['role_id'] != '') {
+                $query->whereHas('role', function ($_query) use ($params) {
+                    $_query->where('id', $params['role_id']);
+                });
             }
         });
         $list->each(function ($item) {

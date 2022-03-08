@@ -31,7 +31,6 @@ class PermissionService extends AbstractController
         $list = $this->permissionModel->getList(['id', 'code', 'name', 'type', 'created_at', 'updated_at'], $params, function ($orm) use ($params) {
             //筛选
             if ($params['name'] != "") {
-
                 $orm->where('name', 'like', "%{$params['name']}%");
             }
 

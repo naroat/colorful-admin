@@ -26,6 +26,8 @@ class AdminUserController extends AbstractController
         try {
             $params = $this->verify->requestParams([
                 ['account', ''],
+                ['name', ''],
+                ['role_id', ''],
                 ['is_all', 0],
             ], $this->request);
 
@@ -33,9 +35,11 @@ class AdminUserController extends AbstractController
             $this->verify->check(
                 $params,
                 [
+                    'role_id' => 'integer',
                     'is_all' => 'in:0,1',
                 ],
                 [
+                    'role_id.integer' => '参数错误！',
                     'is_all.in' => '参数错误',
                 ]
             );
