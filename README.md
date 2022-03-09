@@ -1,12 +1,8 @@
-<p align="center">
-    <div style="margin: auto;">Colorful-Admin</div>
-    <div>快速搭建基于角色权限的管理后台，后端使用hyperf，前端基于vue-element-admin开发，前后端分离；</div>
-    <div>支持的给个stars, 有问题的提issue; 定期处理;</div>
-</p>
-
-
-
 ## 项目介绍
+
+快速搭建基于角色权限的管理后台，后端使用hyperf，前端基于vue-element-admin开发，前后端分离；
+
+> 支持的给个stars, 有问题的提issue; 定期处理;
 
 演示：`admin.colorful.ranblogs.com`
 
