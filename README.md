@@ -42,6 +42,10 @@ vue-element-admin: "4.4.0"
 git clone https://github.com/taoran1401/colorful-admin.git
 cd colorful-admin
 ./docker-compose up
+
+cd admin
+npm i
+npm run build:prod
 ```
 `docker-compose.yml`根据自己情况配置端口映射和名称
 

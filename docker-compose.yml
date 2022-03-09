@@ -13,7 +13,7 @@ services:
         rm -rf runtime/*
         php bin/hyperf.php start
     volumes:
-      - ./api:/data/project/colorful-admin
+      - ./api:/data/project/colorful-admin/api
     tty: true
     links:
       - mysql
@@ -40,10 +40,10 @@ services:
     image: nginx:1.19-alpine
     container_name: nginx
     ports:
-      - 80:80
+      - 8081:80
     links:
       - app
     volumes:
       - ./docker/conf.d:/etc/nginx/conf.d
       - ./docker/log:/var/log/nginx
-      - ./admin:/var/www/colorful-admin
+      - ./admin/dist:/var/www/colorful-admin/dist
