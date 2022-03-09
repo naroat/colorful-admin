@@ -1,10 +1,11 @@
 ## 项目介绍
 
-快速搭建基于角色权限的管理后台，后端使用hyperf，前端基于vue-element-admin开发，前后端分离；
+快速搭建基于角色权限的管理后台，后端使用hyperf，后台前端基于vue-element-admin开发，前后端分离；
 
 > 支持的给个stars, 有问题的提issue; 定期处理;
 
-演示：`admin.colorful.ranblogs.com`
+演示：`http://demo.colorful.ranblogs.com/admin`
+> 账号/密码：admin/a1a1a1
 
 目录：
 ```
@@ -36,7 +37,36 @@ vue-element-admin: "4.4.0"
 
 ## 搭建和部署
 
-### docker方式
+
+```
+git clone https://github.com/taoran1401/colorful-admin.git
+cd colorful-admin
+./docker-compose up
+```
+`docker-compose.yml`根据自己情况配置端口映射和名称
+
+```
+git clone https://github.com/taoran1401/colorful-admin.git
+# 启动后端
+cd colorful-admin/api
+composer i
+php bin/hyperf start
+# 拷贝一份.env.example出来后自行配置env
+cp .env.example .env
+
+# 启动后台前端
+cd colorful-admin/admin
+npm install
+npm run dev
+```
+
+```
+
+```
+
+
+
+
 
 ### 手动搭建
 

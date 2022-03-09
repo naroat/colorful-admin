@@ -1,0 +1,49 @@
+version: '3.1'
+services:
+  app:
+    container_name: colorful-admin
+    image: hyperf/hyperf:7.4-alpine-v3.11-swoole
+    command:
+      - /bin/sh
+      - -c
+      - |
+        cd /data/project/colorful-admin/api
+        cp .env.example .env
+        php -d memory_limit=-1 `which composer` i --no-dev
+        rm -rf runtime/*
+        php bin/hyperf.php start
+    volumes:
+      - ./api:/data/project/colorful-admin
+    tty: true
+    links:
+      - mysql
+      - redis
+    environment:
+      HOST_IP: 127.0.0.1
+      HOST_PORT: 9604
+  mysql:
+    container_name: mysql
+    image: mysql:8
+    ports:
+      - 3306:3306
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./docker/data:/var/lib/mysql:rw
+      - ./docker/db:/docker-entrypoint-initdb.d:ro
+  redis:
+    image: redis:6.2.5
+    container_name: redis
+    command: redis-server
+  nginx:
+    image: nginx:1.19-alpine
+    container_name: nginx
+    ports:
+      - 80:80
+    links:
+      - app
+    volumes:
+      - ./docker/conf.d:/etc/nginx/conf.d
+      - ./docker/log:/var/log/nginx
+      - ./admin:/var/www/colorful-admin
