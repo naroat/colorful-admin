@@ -1,18 +1,7 @@
-/*
- Navicat MySQL Data Transfer
+DROP DATABASE IF EXISTS `colorful-admin`;
+CREATE DATABASE IF NOT EXISTS `colorful-admin` CHARACTER SET 'utf8mb4';
+USE `colorful-admin`;
 
- Source Server         : dockermysql-master
- Source Server Type    : MySQL
- Source Server Version : 80025
- Source Host           : 120.78.144.133:3306
- Source Schema         : colorful-admin
-
- Target Server Type    : MySQL
- Target Server Version : 80025
- File Encoding         : 65001
-
- Date: 09/03/2022 12:02:56
-*/
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
