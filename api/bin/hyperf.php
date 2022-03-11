@@ -1,6 +1,5 @@
 #!/usr/bin/env php
 <?php
-
 ini_set('display_errors', 'on');
 ini_set('display_startup_errors', 'on');
 ini_set('memory_limit', '1G');
@@ -17,7 +16,6 @@ require BASE_PATH . '/vendor/autoload.php';
     Hyperf\Di\ClassLoader::init();
     /** @var Psr\Container\ContainerInterface $container */
     $container = require BASE_PATH . '/config/container.php';
-
     $application = $container->get(Hyperf\Contract\ApplicationInterface::class);
     $application->run();
 })();
