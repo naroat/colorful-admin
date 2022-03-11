@@ -15,31 +15,7 @@
       <img :src="emptyGif" class="emptyGif">
     </div> -->
     <div>
-      <div>
-        介绍：
-        前后端分离
-        快速搭建属于自己的管理后台
-        具备管理后台常用功能
-      </div>
-      <div>
-        具备功能：
-        Jwt认证登录
-        修改密码
-        文件上传
-        管理员管理
-        菜单管理
-        权限管理
-        角色管理
-        网站设置
-        文章管理
-        管理员操作日志
-      </div>
-      <div>
-        版本信息：
-        php: ">=7.3"
-        hyperf: "~2.2.0"
-        vue-element-admin: "4.4.0"
-      </div>
+      尊敬的{{ name }}, 欢迎来打colorful-admin管理后台!
     </div>
   </div>
 </template>

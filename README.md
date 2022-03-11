@@ -4,9 +4,6 @@
 
 > 支持的给个stars, 有问题的提issue; 定期处理;
 
-演示：`http://demo.colorful.ranblogs.com/admin`
-> 账号/密码：admin/a1a1a1
-
 目录：
 ```
 api: 后端代码
