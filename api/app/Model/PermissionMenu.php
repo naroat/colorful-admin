@@ -15,7 +15,7 @@ use App\Helpers\Helper;
 
 class PermissionMenu extends Model
 {
-    protected $dateFormat = 'Uv';
+    public $timestamps = false;
 
     /**
      * The table associated with the model.

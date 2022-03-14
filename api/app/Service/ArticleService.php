@@ -6,6 +6,7 @@ namespace App\Service;
 use App\Model\ArticleArticleTag;
 use Hyperf\DbConnection\Db;
 use Hyperf\Di\Annotation\Inject;
+use function Taoran\HyperfPackage\Helpers\get_msectime;
 use function Taoran\HyperfPackage\Helpers\set_save_data;
 
 
@@ -110,6 +111,8 @@ class ArticleService
                 'cat_id' => $params['cat_id'],
                 'is_show' => $params['is_show'] ?? 0,
                 'type' => $params['type'] ?? 0,
+                'created_at' => get_msectime(),
+                'updated_at' => get_msectime(),
             ])->save();
 
             //设置标签
@@ -136,6 +139,7 @@ class ArticleService
             //检查分类
             $this->articleCategoryService->check($params['cat_id']);
             $data = $this->articleModel->getOneById($id, ['*']);
+            $params['updated_at'] = get_msectime();
             set_save_data($data, $params)->save();
             //设置标签
             $this->setTags($params, $data->id);

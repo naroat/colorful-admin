@@ -9,6 +9,7 @@ use App\Model\RolePermission;
 use Hyperf\DbConnection\Db;
 use Hyperf\Di\Annotation\Inject;
 use Psr\Http\Message\ServerRequestInterface;
+use function Taoran\HyperfPackage\Helpers\get_msectime;
 use function Taoran\HyperfPackage\Helpers\set_save_data;
 
 class RoleService
@@ -72,6 +73,8 @@ class RoleService
             $roleModel = new \App\Model\Role();
             set_save_data($roleModel, [
                 'name' => $params['name'],
+                'created_at' => get_msectime(),
+                'updated_at' => get_msectime(),
             ]);
             $roleModel->save();
 
@@ -98,6 +101,7 @@ class RoleService
             //更新角色
             set_save_data($role, [
                 'name' => $params['name'],
+                'updated_at' => get_msectime(),
             ]);
             $role->save();
 

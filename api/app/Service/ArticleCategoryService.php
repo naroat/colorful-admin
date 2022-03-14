@@ -4,6 +4,7 @@
 namespace App\Service;
 
 use Hyperf\Di\Annotation\Inject;
+use function Taoran\HyperfPackage\Helpers\get_msectime;
 use function Taoran\HyperfPackage\Helpers\set_save_data;
 
 class ArticleCategoryService
@@ -45,6 +46,8 @@ class ArticleCategoryService
             'name' => $params['name'],
             'p_id' => $params['p_id'],
             'sort' => $params['sort'],
+            'created_at' => get_msectime(),
+            'updated_at' => get_msectime(),
         ])->save();
 
         return true;
@@ -53,6 +56,7 @@ class ArticleCategoryService
     public function update(int $id, $params)
     {
         $articleCategory = $this->articleCategoryModel->getOneById($id, ['*']);
+        $params['updated_at'] = get_msectime();
         set_save_data($articleCategory, $params)->save();
         return true;
     }

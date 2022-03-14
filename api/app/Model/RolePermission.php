@@ -15,7 +15,7 @@ use Hyperf\Di\Annotation\Inject;
 
 class RolePermission extends Model
 {
-    protected $dateFormat = 'Uv';
+    public $timestamps = false;
 
     /**
      * The table associated with the model.

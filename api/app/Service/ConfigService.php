@@ -6,6 +6,7 @@ namespace App\Service;
 use Hyperf\DbConnection\Db;
 use Hyperf\Di\Annotation\Inject;
 use Taoran\HyperfPackage\Core\AbstractController;
+use function Taoran\HyperfPackage\Helpers\get_msectime;
 
 class ConfigService extends AbstractController
 {
@@ -45,6 +46,7 @@ class ConfigService extends AbstractController
                 'base_setting_keyword' => '',
                 'base_setting_description' => '',
                 'about_us' => '',
+                'updated_at' => get_msectime(),
             ]);
 
             foreach ($params as $key => $val) {

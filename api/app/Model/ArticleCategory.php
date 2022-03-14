@@ -11,7 +11,7 @@ class ArticleCategory extends Model
 {
     use RepositoryTrait;
 
-    protected $dateFormat = 'Uv';
+    public $timestamps = false;
 
     /**
      * The table associated with the model.

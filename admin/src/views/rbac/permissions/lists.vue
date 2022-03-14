@@ -24,6 +24,7 @@
       <el-table-column
         prop="name"
         label="名称"
+        width="150"
       />
       <el-table-column
         prop="code"
@@ -33,7 +34,6 @@
       <el-table-column
         prop="type_text"
         label="类型"
-        width="400"
       />
       <el-table-column
         prop="created_at"

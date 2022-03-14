@@ -121,6 +121,8 @@ class AdminUserService
                 'salt' => $salt,
                 'headimg' => $params['headimg'] ?? '',
                 'role_id' => $params['role_id'],
+                'created_at' => get_msectime(),
+                'updated_at' => get_msectime(),
             ])->save();
 
             Db::commit();
@@ -162,6 +164,7 @@ class AdminUserService
                 $params['salt'] = $salt;
             }
 
+            $params['updated_at'] = get_msectime();
             set_save_data($adminUser, $params)->save();
 
             Db::commit();

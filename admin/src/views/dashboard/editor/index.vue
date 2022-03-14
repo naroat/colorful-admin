@@ -15,7 +15,7 @@
       <img :src="emptyGif" class="emptyGif">
     </div> -->
     <div>
-      尊敬的{{ name }}, 欢迎来打colorful-admin管理后台!
+      尊敬的{{ name }}, 欢迎来到colorful-admin管理后台!
     </div>
   </div>
 </template>

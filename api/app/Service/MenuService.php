@@ -8,6 +8,7 @@ use App\Model\RolePermission;
 use Hyperf\Di\Annotation\Inject;
 use Psr\Http\Message\ServerRequestInterface;
 use Taoran\HyperfPackage\Core\AbstractController;
+use function Taoran\HyperfPackage\Helpers\get_msectime;
 use function Taoran\HyperfPackage\Helpers\set_save_data;
 
 
@@ -27,7 +28,7 @@ class MenuService extends AbstractController
 
     public function getList($params)
     {
-        $list = (new \App\Model\Menu())->getList(['id', 'name', 'path', 'component', 'icon', 'p_id', 'sort', 'created_at'], $params, function ($orm) use ($params) {
+        $list = $this->menuModel->getList(['id', 'name', 'path', 'component', 'icon', 'p_id', 'sort', 'created_at', 'updated_at'], $params, function ($orm) use ($params) {
             //筛选
             if ($params['name'] != '') {
                 $orm->where('name', 'like', "%{$params['name']}%");
@@ -72,6 +73,8 @@ class MenuService extends AbstractController
             'p_id' => $params['p_id'],
             'sort' => $params['sort'],
             'component' => $params['component'],
+            'created_at' => get_msectime(),
+            'updated_at' => get_msectime(),
         ]);
         $menuModel->save();
 
@@ -92,7 +95,7 @@ class MenuService extends AbstractController
             }
         }
 
-        //添加
+        //更新
         set_save_data($menu, [
             'name' => $params['name'],
             'path' => $params['path'],
@@ -100,6 +103,7 @@ class MenuService extends AbstractController
             'p_id' => $params['p_id'],
             'sort' => $params['sort'],
             'component' => $params['component'],
+            'updated_at' => get_msectime(),
         ]);
         $menu->save();
         return true;
@@ -108,7 +112,7 @@ class MenuService extends AbstractController
     public function destroy(int $id)
     {
         //获取菜单
-        $menu = (new \App\Model\Menu())->getOneById($id, ['*']);
+        $menu = $this->menuModel->getOneById($id, ['*']);
 
         //如果有下级不允许删除
         if ($this->menuModel->where('is_on', 1)->where('p_id', $id)->exists()) {

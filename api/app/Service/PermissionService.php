@@ -9,6 +9,7 @@ use Hyperf\DbConnection\Db;
 use Hyperf\Di\Annotation\Inject;
 use Psr\Http\Message\ServerRequestInterface;
 use Taoran\HyperfPackage\Core\AbstractController;
+use function Taoran\HyperfPackage\Helpers\get_msectime;
 use function Taoran\HyperfPackage\Helpers\set_save_data;
 
 
@@ -87,6 +88,8 @@ class PermissionService extends AbstractController
                 'name' => $params['name'],
                 'code' => $params['code'],
                 'type' => $params['type'],
+                'created_at' => get_msectime(),
+                'updated_at' => get_msectime(),
             ]);
             $permissionModel->save();
 
@@ -114,6 +117,7 @@ class PermissionService extends AbstractController
                 'name' => $params['name'],
                 'code' => $params['code'],
                 'type' => $params['type'],
+                'updated_at' => get_msectime(),
             ]);
             $permission->save();
 

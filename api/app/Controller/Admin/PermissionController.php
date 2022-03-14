@@ -35,6 +35,7 @@ class PermissionController extends \Taoran\HyperfPackage\Core\AbstractController
                 ['name', ""],
                 ['code', ""],
                 ['type', ""],
+                ['page', ""],
                 ['is_all', 0]
             ], $this->request);
 

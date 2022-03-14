@@ -13,7 +13,7 @@ namespace App\Model;
 
 class AdminUserRole extends Model
 {
-    protected $dateFormat = 'Uv';
+    public $timestamps = false;
 
     /**
      * The table associated with the model.

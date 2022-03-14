@@ -12,6 +12,7 @@ use Hyperf\HttpServer\Router\Dispatched;
 use Psr\Container\ContainerInterface;
 use Hyperf\Di\Aop\ProceedingJoinPoint;
 use Psr\Http\Message\ServerRequestInterface;
+use function Taoran\HyperfPackage\Helpers\get_msectime;
 use function Taoran\HyperfPackage\Helpers\set_save_data;
 use Taoran\HyperfPackage\Traits\NetworkTrait;
 
@@ -108,6 +109,8 @@ class AdminHandleLog extends AbstractAspect
             'request_data' => json_encode($params, JSON_UNESCAPED_UNICODE),
             'response_data' => $response_data,
             'ip' => $this->getClientIp(),
+            'created_at' => get_msectime(),
+            'updated_at' => get_msectime(),
         ]);
         $handleLogModel->save();
     }
