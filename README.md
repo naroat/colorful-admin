@@ -51,7 +51,7 @@ mysql账号/密码：root/root
 
 redis无密码
 
-> 注意：如果需要设置mysql和redis密码可以在当前目录下的`.env`中配置
+> 注意：如果需要设置mysql和redis密码可以在当前目录下的`.env`中配置;(.env可从.env.example文件复制出来)
 
 ## 自定义
 
