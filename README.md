@@ -45,6 +45,13 @@ cd colorful-admin
 
 访问地址： `http://127.0.0.1:8080`
 
+后台账号/密码： admin/a123456
+
+mysql账号/密码：root/root
+
+redis无密码
+
+> 注意：如果需要设置mysql和redis密码可以在当前目录下的`.env`中配置
 
 ## 自定义
 
